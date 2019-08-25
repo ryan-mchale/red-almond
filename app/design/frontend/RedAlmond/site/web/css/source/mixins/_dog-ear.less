@@ -1,0 +1,68 @@
+.dog-ear(
+    @placement: bottom right,
+    @background-color: white,
+    @flip-fill-color: transparent,
+    @flip-size: 10px,
+    @offset-vertical: 0,
+    @offset-horizontal: 0
+) {
+    position: relative;
+
+    @position1: extract(@placement, 1);
+    @position2: extract(@placement, 2);
+
+    .place-element() {
+        position: absolute;
+            @{position1}: @offset-vertical;
+            @{position2}: @offset-horizontal;
+    }
+
+    &:before {
+        .place-element();
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+
+        & when (@position1 = top) {
+            border-top: @flip-size solid @background-color;
+        }
+
+        & when (@position1 = bottom) {
+            border-bottom: @flip-size solid @background-color;
+        }
+
+        & when (@position2 = left) {
+            border-right: @flip-size solid transparent;
+        }
+
+        & when (@position2 = right) {
+            border-left: @flip-size solid transparent;
+        }
+    }
+
+    &:after {
+        .place-element();
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+
+        & when (@position1 = top) {
+            border-bottom: @flip-size solid @flip-fill-color;
+        }
+
+        & when (@position1 = bottom) {
+            border-top: @flip-size solid @flip-fill-color;
+        }
+
+        & when (@position2 = left) {
+            border-left: @flip-size solid transparent;
+        }
+
+        & when (@position2 = right) {
+            border-right: @flip-size solid transparent;
+        }
+    }
+
+}

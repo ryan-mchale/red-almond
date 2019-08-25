@@ -1,3 +1,4 @@
+@import "mixins/_dog-ear.less";
 @import "mixins/_button.less";
 
 & when (@media-common = true) {
@@ -13,5 +14,19 @@
 
     .btn-continue {
         .button-secondary();
+    }
+
+    .grid {
+        .lib-css(display, flex, 1);
+        .lib-css(flex-wrap, wrap, 1);
+        margin-left: (-1 * @theme-grid-gutter-width);
+
+        > * {
+            padding-left: @theme-grid-gutter-width;
+        }
+
+        .col {
+            flex: 1 1 auto;
+        }
     }
 }
