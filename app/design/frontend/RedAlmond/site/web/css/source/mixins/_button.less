@@ -1,73 +1,105 @@
 @import (reference) "../_variables_extend.less";
 
-.button-reset() {
+.dogear(
+    @placement: bottom right,
+    @background-color: white,
+    @flip-fill-color: transparent,
+    @flip-size: 10px
+) {
+    position: relative;
+
+    @position1: extract(@placement, 1);
+    @position2: extract(@placement, 2);
+
+    .place-element() {
+        position: absolute;
+            @{position1}: -@theme-button-border-width;
+            @{position2}: -@theme-button-border-width;
+    }
+
+    &:before {
+        .place-element();
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+
+        & when (@position1 = top) {
+            border-top: @flip-size solid @background-color;
+        }
+
+        & when (@position1 = bottom) {
+            border-bottom: @flip-size solid @background-color;
+        }
+
+        & when (@position2 = left) {
+            border-right: @flip-size solid transparent;
+        }
+
+        & when (@position2 = right) {
+            border-left: @flip-size solid transparent;
+        }
+    }
+
+    &:after {
+        .place-element();
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+
+        & when (@position1 = top) {
+            border-bottom: @flip-size solid @flip-fill-color;
+        }
+
+        & when (@position1 = bottom) {
+            border-top: @flip-size solid @flip-fill-color;
+        }
+
+        & when (@position2 = left) {
+            border-left: @flip-size solid transparent;
+        }
+
+        & when (@position2 = right) {
+            border-right: @flip-size solid transparent;
+        }
+    }
+
+}
+
+.theme-button(@type: 'primary') {
+    @background-color: ~"@{color-@{type}}";
+    @border-color: ~"@{color-@{type}}";
+    @flip-fill-color: ~"@{color-@{type}-dark}";
+
     .lib-button(
-        @_button-padding: 0,
-        @_button-color: @color-black,
-        @_button-background: none,
-        @_button-border: none,
-        @_button-color-hover: none,
-        @_button-background-hover: none,
-        @_button-border-hover: none,
-        @_button-color-active: none,
-        @_button-background-active: none,
-        @_button-border-active: none,
+        @_button-padding: 10px 40px,
+        @_button-color: @color-white,
+        @_button-background: @background-color,
+        @_button-border: @theme-button-border-width solid @border-color,
+        @_button-color-hover: @color-black,
+        @_button-background-hover: @color-white,
+        @_button-border-hover: @theme-button-border-width solid @border-color,
+        @_button-color-active: @color-black,
+        @_button-background-active: @color-white,
+        @_button-border-active: @theme-button-border-width solid @border-color,
+        @_button-font-weight: @theme-button-font-weight
     );
-}
-
-.dogear() {
-    @flip-size: 20px;
-    @left-border-x: 0;
-    @left-border-y: 0;
-
-    @border-thickness: 2px;
-    @flip-color: orange;
-
-    //background-image: linear-gradient(#658E15, #658E15),
-    //linear-gradient(#658E15, #658E15),
-    //linear-gradient(#658E15, #658E15),
-    //linear-gradient(#658E15, #658E15),
-    //linear-gradient(to bottom left, transparent calc(50% - 1px),
-    //#658E15 calc(50% - 1px), #658E15 calc(50% + 1px), #658E15 calc(50% + 1px)),
-    //linear-gradient(#97c02f, #97c02f),
-    //linear-gradient(#97c02f, #97c02f);
-
-    background-image: linear-gradient(#658E15, #658E15),
-    linear-gradient(#658E15, #658E15),
-    linear-gradient(#658E15, #658E15),
-    linear-gradient(#658E15, #658E15),
-    linear-gradient(to top left, transparent calc(50% - 1px), #658E15 calc(50% - 1px), #658E15 calc(50% + 1px), @flip-color calc(50% + 1px)),
-    linear-gradient(#97c02f, #97c02f),
-    linear-gradient(#97c02f, #97c02f);
-
-    background-size: @border-thickness 100%, @border-thickness 100%, 100% @border-thickness, 100% @border-thickness, @flip-size @flip-size, 100% 100%, 100% 100%;
-
-    background-position: @left-border-x @left-border-y,
-    100% @flip-size,
-    -@flip-size 0,
-    0 100%,
-    100% 0,
-    -@flip-size 0,
-    100% @flip-size;
-    background-repeat: no-repeat;
-}
-
-.theme-button() {
-    .button-reset();
-    .dogear();
-    padding: 14px 40px;
+    .dogear(@flip-fill-color: @flip-fill-color);
+    border-radius: 0;
     text-transform: uppercase;
+    letter-spacing: @theme-button-letter-spacing;
     font-weight: 700;
 }
 
 .button-primary() {
-    .theme-button();
+    .theme-button('primary');
 }
 
 .button-secondary() {
-    .theme-button();
+    .theme-button('secondary');
 }
 
 .button-tertiary() {
-    .theme-button();
+    .theme-button('tertiary');
 }
