@@ -2,39 +2,46 @@
 @import "mixins/_button.less";
 
 & when (@media-common = true) {
-    .primary {
-        &.tocart {
-            .button-primary();
+    .column.main {
+        .primary {
+            &.tocart {
+                .button-primary();
+            }
+
+            &.checkout {
+                .button-tertiary();
+            }
         }
 
-        &.checkout {
-            .button-tertiary();
-        }
-    }
-
-    .btn-continue {
-        .button-secondary();
-    }
-
-    .grid {
-        .lib-css(display, flex, 1);
-        .lib-css(flex-wrap, wrap, 1);
-        margin-left: (-1 * @theme-grid-gutter-width);
-
-        > * {
-            padding-left: @theme-grid-gutter-width;
+        .btn-continue {
+            .button-secondary();
         }
 
-        .col {
-            flex: 1 1 auto;
-        }
-    }
-
-    @supports (display: grid) {
         .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-gap: @theme-grid-gutter-width;
+            .lib-css(display, flex, 1);
+            .lib-css(flex-wrap, wrap, 1);
+            margin-left: (-1 * @theme-grid-gutter-width);
+
+            > * {
+                padding-left: @theme-grid-gutter-width;
+            }
+
+            .col {
+                flex: 1 1 auto;
+            }
+        }
+
+        @supports (display: grid) {
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-gap: @theme-grid-gutter-width;
+                margin-left: initial;
+
+                > * {
+                    padding-left: initial;
+                }
+            }
         }
     }
 }
