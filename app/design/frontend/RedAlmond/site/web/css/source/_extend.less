@@ -1,0 +1,17 @@
+@import "mixins/_button.less";
+
+& when (@media-common = true) {
+    .primary {
+        &.tocart {
+            .button-primary();
+        }
+
+        &.checkout {
+            .button-tertiary();
+        }
+    }
+
+    .btn-continue {
+        .button-secondary();
+    }
+}
