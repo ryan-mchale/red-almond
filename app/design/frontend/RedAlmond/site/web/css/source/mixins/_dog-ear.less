@@ -17,8 +17,9 @@
             @{position2}: @offset-horizontal;
     }
 
-    &:before {
+    &::before {
         .place-element();
+        z-index: 999;
         content: '';
         display: block;
         width: 0;
@@ -41,7 +42,7 @@
         }
     }
 
-    &:after {
+    &::after {
         .place-element();
         content: '';
         display: block;

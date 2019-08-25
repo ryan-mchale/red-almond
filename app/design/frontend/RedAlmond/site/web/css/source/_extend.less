@@ -29,4 +29,12 @@
             flex: 1 1 auto;
         }
     }
+
+    @supports (display: grid) {
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: @theme-grid-gutter-width;
+        }
+    }
 }
