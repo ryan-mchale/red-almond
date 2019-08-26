@@ -1,0 +1,14 @@
+{
+    "name": "red-almond/theme-site",
+    "description": "N/A",
+    "require": {
+        "magento/framework": "~102.0.2"
+    },
+    "type": "magento2-theme",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ]
+    }
+}
